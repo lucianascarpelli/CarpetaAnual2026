@@ -65,12 +65,12 @@ export const projects: Project[] = [
   pieces: "Logo, Sistema de marca, Packaging, Elementos gráficos, Landing page",
   description: "Amora es un proyecto de branding y diseño digital desarrollado como exploración de una marca de cuidado de la piel basada en ingredientes naturales y una estética limpia. El objetivo fue construir una identidad visual coherente desde cero, traduciendo valores como pureza, suavidad y confianza en un sistema gráfico aplicable tanto a packaging como a una experiencia web.",
   gallery: [
-    "/img/amora/amora4.webp",
-    "/img/amora/amora1.webp",
-    "/img/amora/amora2.webp",
-    "/img/amora/amora3.webp",
-    "/img/amora/amora5.webp",
-    "/img/amora/amora6.webp"
+    "/img/amora/AMORA4.webp",
+    "/img/amora/AMORA1.webp",
+    "/img/amora/AMORA2.webp",
+    "/img/amora/AMORA3.webp",
+    "/img/amora/AMORA5.webp",
+    "/img/amora/AMORA6.webp"
   ]
 },
   {
