@@ -52,7 +52,7 @@ export const projects: Project[] = [
   id: "amora",
   title: "Amora – Skincare Brand",
   category: "DISEÑO GRÁFICO | BRANDING | DISEÑO WEB",
-  img: "/img/amora/amora4.webp",
+  img: "/img/amora/AMORA4.webp",
   need: "Desarrollar una identidad visual y una landing page para una marca ficticia de skincare enfocada en ingredientes naturales, limpios y libres de químicos agresivos.",
   tools: [
     "Adobe Illustrator",
