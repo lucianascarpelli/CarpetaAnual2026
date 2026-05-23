@@ -26,49 +26,85 @@ export function Process() {
       </div>
 
       {/* SHAPES */}
-      <div className="lg:w-1/2 flex gap-10 justify-center z-10">
+     {/* SHAPES */}
+<div className="lg:w-1/2 flex gap-10 justify-center z-10 relative">
 
-        <motion.div
-          onMouseEnter={() => setHoveredShape("circle")}
-          onMouseLeave={() => setHoveredShape(null)}
-          animate={{
-            scale: hoveredShape === "circle" ? 1.05 : 1,
-            borderColor: hoveredShape === "circle" ? "#fb7185" : "#525252",
-            backgroundColor: hoveredShape === "circle"
-              ? "rgba(244,63,94,0.15)"
-              : "rgba(255,255,255,0.04)",
-          }}
-          className="w-[170px] h-[170px] rounded-full border"
-        />
+  {/* CURSOR BLOB LOCAL */}
+  {hoveredShape && (
+    <motion.div
+      layout
+      className="absolute pointer-events-none z-20 bg-rose-400/20 border border-rose-400/40"
+      style={{
+        width: hoveredShape === "rectangle"
+          ? 220
+          : hoveredShape === "square"
+          ? 150
+          : 170,
+        height: hoveredShape === "rectangle"
+          ? 110
+          : hoveredShape === "square"
+          ? 150
+          : 170,
+        borderRadius:
+          hoveredShape === "circle"
+            ? "50%"
+            : hoveredShape === "square"
+            ? "0%"
+            : "30%",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+      transition={{ type: "spring", stiffness: 140, damping: 18 }}
+    />
+  )}
 
-        <div className="flex flex-col gap-8">
-          <motion.div
-            onMouseEnter={() => setHoveredShape("rectangle")}
-            onMouseLeave={() => setHoveredShape(null)}
-            animate={{
-              scale: hoveredShape === "rectangle" ? 1.05 : 1,
-              borderColor: hoveredShape === "rectangle" ? "#fb7185" : "#525252",
-              backgroundColor: hoveredShape === "rectangle"
-                ? "rgba(244,63,94,0.15)"
-                : "rgba(255,255,255,0.04)",
-            }}
-            className="w-[220px] h-[110px] border"
-          />
+  {/* CIRCLE */}
+  <motion.div
+    onMouseEnter={() => setHoveredShape("circle")}
+    onMouseLeave={() => setHoveredShape(null)}
+    animate={{
+      scale: hoveredShape === "circle" ? 1.05 : 1,
+      borderColor: hoveredShape === "circle" ? "#fb7185" : "#525252",
+      backgroundColor: hoveredShape === "circle"
+        ? "rgba(244,63,94,0.15)"
+        : "rgba(255,255,255,0.04)",
+    }}
+    className="w-[170px] h-[170px] rounded-full border relative z-10"
+  />
 
-          <motion.div
-            onMouseEnter={() => setHoveredShape("square")}
-            onMouseLeave={() => setHoveredShape(null)}
-            animate={{
-              scale: hoveredShape === "square" ? 1.05 : 1,
-              borderColor: hoveredShape === "square" ? "#fb7185" : "#525252",
-              backgroundColor: hoveredShape === "square"
-                ? "rgba(244,63,94,0.15)"
-                : "rgba(255,255,255,0.04)",
-            }}
-            className="w-[150px] h-[150px] border"
-          />
-        </div>
-      </div>
+  <div className="flex flex-col gap-8 relative z-10">
+
+    {/* RECTANGLE */}
+    <motion.div
+      onMouseEnter={() => setHoveredShape("rectangle")}
+      onMouseLeave={() => setHoveredShape(null)}
+      animate={{
+        scale: hoveredShape === "rectangle" ? 1.05 : 1,
+        borderColor: hoveredShape === "rectangle" ? "#fb7185" : "#525252",
+        backgroundColor: hoveredShape === "rectangle"
+          ? "rgba(244,63,94,0.15)"
+          : "rgba(255,255,255,0.04)",
+      }}
+      className="w-[220px] h-[110px] border"
+    />
+
+    {/* SQUARE */}
+    <motion.div
+      onMouseEnter={() => setHoveredShape("square")}
+      onMouseLeave={() => setHoveredShape(null)}
+      animate={{
+        scale: hoveredShape === "square" ? 1.05 : 1,
+        borderColor: hoveredShape === "square" ? "#fb7185" : "#525252",
+        backgroundColor: hoveredShape === "square"
+          ? "rgba(244,63,94,0.15)"
+          : "rgba(255,255,255,0.04)",
+      }}
+      className="w-[150px] h-[150px] border"
+    />
+
+  </div>
+</div>
     </section>
   );
 }
