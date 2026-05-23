@@ -164,7 +164,7 @@ export function About() {
                   <div className="space-y-3">
                     <div>
                       <p className="text-neutral-800 leading-snug">
-                        Google UX Design Foundations
+                        Foundations of User Experience (UX)
                       </p>
                       <p className="text-neutral-500 font-light text-sm mt-1">
                         Google · 2026
@@ -228,7 +228,7 @@ export function About() {
                         Freelance
                       </h3>
                       <p className="text-neutral-500 font-light">
-                        Diseño visual, motion y desarrollo web
+                        Diseño digital, diseño y desarrollo web, Cobertura de eventos, Diseño audiovisual
                       </p>
                     </div>
                     <span className="text-sm uppercase tracking-[0.18em] text-neutral-400 whitespace-nowrap">
