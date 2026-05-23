@@ -42,7 +42,7 @@ export function Process() {
         style={{
           translateX: "-50%",
           translateY: "-50%",
-          boxShadow: "0 0 25px rgba(244,63,94,0.35)",
+          boxShadow: "0 0 25px rgba(63, 244, 105, 0.35)",
         }}
         animate={hoveredShape}
         variants={shapeVariants}
