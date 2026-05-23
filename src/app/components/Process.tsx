@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, type Variant } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 
 type ShapeType = "blob" | "square" | "rectangle" | "circle";
 
@@ -7,28 +7,12 @@ const shapeVariants: Record<ShapeType, Variant> = {
   blob: {
     width: 80,
     height: 80,
-    borderRadius: [
-      "30% 70% 70% 30% / 30% 30% 70% 70%",
-      "60% 40% 30% 70% / 60% 30% 70% 40%",
-    ],
-    rotate: [0, 180, 360],
+    borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%",
+    rotate: 0,
     transition: {
-      borderRadius: {
-        duration: 6,
-        repeat: Infinity,
-        repeatType: "mirror",
-        ease: "easeInOut",
-      },
-      rotate: {
-        duration: 20,
-        repeat: Infinity,
-        ease: "linear",
-      },
-      width: { duration: 0.3 },
-      height: { duration: 0.3 },
+      duration: 0.8,
     },
   },
-
   square: {
     width: 150,
     height: 150,
@@ -37,10 +21,9 @@ const shapeVariants: Record<ShapeType, Variant> = {
     transition: {
       type: "spring",
       stiffness: 120,
-      damping: 30,
+      damping: 25,
     },
   },
-
   rectangle: {
     width: 220,
     height: 110,
@@ -49,10 +32,9 @@ const shapeVariants: Record<ShapeType, Variant> = {
     transition: {
       type: "spring",
       stiffness: 120,
-      damping: 30,
+      damping: 25,
     },
   },
-
   circle: {
     width: 170,
     height: 170,
@@ -61,7 +43,7 @@ const shapeVariants: Record<ShapeType, Variant> = {
     transition: {
       type: "spring",
       stiffness: 120,
-      damping: 30,
+      damping: 25,
     },
   },
 };
@@ -74,57 +56,33 @@ export function Process() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const smoothX = useSpring(mouseX, {
-    damping: 30,
-    stiffness: 120,
-    mass: 0.6,
-  });
+  const smoothX = useSpring(mouseX, { stiffness: 120, damping: 30 });
+  const smoothY = useSpring(mouseY, { stiffness: 120, damping: 30 });
 
-  const smoothY = useSpring(mouseY, {
-    damping: 30,
-    stiffness: 120,
-    mass: 0.6,
-  });
+  // ✅ mousemove LOCAL (mucho más liviano)
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (!containerRef.current) return;
 
-  useEffect(() => {
-    let frame: number;
+    const rect = containerRef.current.getBoundingClientRect();
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return;
+    const inside =
+      e.clientX >= rect.left &&
+      e.clientX <= rect.right &&
+      e.clientY >= rect.top &&
+      e.clientY <= rect.bottom;
 
-      cancelAnimationFrame(frame);
+    setIsInside(inside);
 
-      frame = requestAnimationFrame(() => {
-        const rect = containerRef.current!.getBoundingClientRect();
-
-        const inside =
-          e.clientX >= rect.left &&
-          e.clientX <= rect.right &&
-          e.clientY >= rect.top &&
-          e.clientY <= rect.bottom;
-
-        setIsInside(inside);
-
-        if (inside) {
-          mouseX.set(e.clientX - rect.left);
-          mouseY.set(e.clientY - rect.top);
-        }
-      });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove, {
-      passive: true,
-    });
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      cancelAnimationFrame(frame);
-    };
-  }, [mouseX, mouseY]);
+    if (inside) {
+      mouseX.set(e.clientX - rect.left);
+      mouseY.set(e.clientY - rect.top);
+    }
+  };
 
   return (
     <section
       ref={containerRef}
+      onMouseMove={handleMouseMove}
       className="mt-36 pb-25 pt-20 px-6 md:px-12 text-neutral-50 overflow-hidden relative flex flex-col lg:flex-row items-center justify-center min-h-[70vh] gap-16 cursor-none"
       style={{
         background: "rgba(10,10,10,0.82)",
@@ -132,31 +90,29 @@ export function Process() {
         WebkitBackdropFilter: "blur(12px)",
       }}
     >
-      {/* Cursor custom optimizado */}
+      {/* Cursor custom (más liviano) */}
       {isInside && (
         <motion.div
-          className="absolute top-0 left-0 bg-gradient-to-b bg-rose-400 pointer-events-none z-50"
+          className="absolute top-0 left-0 w-4 h-4 bg-rose-400 rounded-full pointer-events-none z-50 mix-blend-screen"
           style={{
             x: smoothX,
             y: smoothY,
             translateX: "-50%",
             translateY: "-50%",
-            boxShadow: "0 0 30px rgba(52,211,153,0.3)",
-            mixBlendMode: "normal",
-            willChange: "transform",
+            boxShadow: "0 0 20px rgba(244,63,94,0.4)",
           }}
-          variants={shapeVariants}
           animate={hoveredShape}
+          variants={shapeVariants}
         />
       )}
 
-      {/* TEXT */}
+      {/* TEXTO */}
       <div className="lg:w-1/2 relative z-10 max-w-2xl pointer-events-auto cursor-auto">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight leading-tight text-white">
             Que cada idea
@@ -184,13 +140,13 @@ export function Process() {
       <div className="lg:w-1/2 relative flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-12 w-full max-w-[600px] h-[500px] z-10 pointer-events-auto">
         <div className="flex flex-col gap-8 items-center">
           <div
-            className="w-[170px] h-[170px] rounded-full border-neutral-600 border bg-neutral-400/10 flex items-center justify-center transition-colors duration-300 hover:border-rose-400/50"
+            className="w-[170px] h-[170px] rounded-full border border-neutral-600 bg-neutral-400/10 transition-colors hover:border-rose-400/50"
             onMouseEnter={() => setHoveredShape("circle")}
             onMouseLeave={() => setHoveredShape("blob")}
           />
 
           <div
-            className="w-[220px] h-[110px] border-neutral-600 border bg-neutral-400/10 flex items-center justify-center transition-colors duration-300 hover:border-rose-400/50"
+            className="w-[220px] h-[110px] border border-neutral-600 bg-neutral-400/10 transition-colors hover:border-rose-400/50"
             onMouseEnter={() => setHoveredShape("rectangle")}
             onMouseLeave={() => setHoveredShape("blob")}
           />
@@ -198,7 +154,7 @@ export function Process() {
 
         <div className="flex flex-col gap-8 items-center mt-12 md:mt-24">
           <div
-            className="w-[150px] h-[150px] border-neutral-600 border bg-neutral-400/10 flex items-center justify-center transition-colors duration-300 hover:border-rose-400/50"
+            className="w-[150px] h-[150px] border border-neutral-600 bg-neutral-400/10 transition-colors hover:border-rose-400/50"
             onMouseEnter={() => setHoveredShape("square")}
             onMouseLeave={() => setHoveredShape("blob")}
           />
