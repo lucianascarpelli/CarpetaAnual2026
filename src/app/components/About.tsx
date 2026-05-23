@@ -1,38 +1,51 @@
+// About.jsx - OPTIMIZADO (simplificado)
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function About() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const smoothX = useSpring(mouseX, {
-    stiffness: 120,
-    damping: 18,
-    mass: 0.6,
-  });
+  const smoothX = useSpring(mouseX, { stiffness: 80, damping: 20, mass: 0.8 });
+  const smoothY = useSpring(mouseY, { stiffness: 80, damping: 20, mass: 0.8 });
 
-  const smoothY = useSpring(mouseY, {
-    stiffness: 120,
-    damping: 18,
-    mass: 0.6,
-  });
-
+  // Detectar visibilidad
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Mouse tracking solo cuando visible
+  useEffect(() => {
+    if (!isVisible) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX - window.innerWidth / 2);
       mouseY.set(e.clientY - window.innerHeight / 2);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
+  }, [isVisible, mouseX, mouseY]);
 
-  const imageX = useTransform(smoothX, (v) => v * 0.012);
-  const imageY = useTransform(smoothY, (v) => v * -0.012);
+  const imageX = useTransform(smoothX, (v) => (isVisible ? v * 0.012 : 0));
+  const imageY = useTransform(smoothY, (v) => (isVisible ? v * -0.012 : 0));
 
   return (
     <section
+      ref={sectionRef}
       id="about"
       className="relative overflow-hidden"
       style={{ zIndex: 3 }}
@@ -73,7 +86,7 @@ export function About() {
           <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-16 lg:gap-20 items-start">
             {/* LEFT */}
             <div className="space-y-10">
-              {/* IMAGE */}
+              {/* IMAGE - animaciones reducidas */}
               <motion.div
                 style={{
                   x: imageX,
@@ -114,17 +127,8 @@ export function About() {
                     filter: "drop-shadow(0 30px 60px rgba(0,0,0,0.12))",
                   }}
                 >
-                  {/* soft blob */}
-                  <motion.div
-                    animate={{
-                      scale: [1, 1.08, 1],
-                      rotate: [0, 4, -4, 0],
-                    }}
-                    transition={{
-                      duration: 10,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
+                  {/* Blob de fondo simplificado - sin animación */}
+                  <div
                     className="absolute inset-0 blur-3xl opacity-70"
                     style={{
                       background: `
@@ -138,19 +142,10 @@ export function About() {
                     }}
                   />
 
-                  {/* IMAGE */}
-                  <motion.img
+                  {/* IMAGE - sin animación */}
+                  <img
                     src="img/yo sola.png"
                     alt="Luciana Scarpelli"
-                    animate={{
-                      y: [0, -5, 0],
-                      scale: [1, 1.015],
-                    }}
-                    transition={{
-                      duration: 8,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
                     className="
                       relative
                       z-10
@@ -161,10 +156,7 @@ export function About() {
                       pointer-events-none
                     "
                     style={{
-                      filter: `
-                        contrast(1.02)
-                        saturate(1.02)
-                      `,
+                      filter: `contrast(1.02) saturate(1.02)`,
                       maskImage:
                         "radial-gradient(circle at center, black 62%, transparent 88%)",
                       WebkitMaskImage:
@@ -174,26 +166,17 @@ export function About() {
                 </motion.div>
               </motion.div>
 
-              {/* META UNDER PHOTO */}
-              <div
-                className="
-                  grid
-                  sm:grid-cols-3
-                  gap-6
-                  pt-2
-                "
-              >
+              {/* META - sin cambios */}
+              <div className="grid sm:grid-cols-3 gap-6 pt-2">
                 <div>
                   <p className="text-xs uppercase tracking-[0.2em] text-neutral-400 mb-3">
                     Formación
                   </p>
-
                   <div className="space-y-3">
                     <div>
                       <p className="text-neutral-800 leading-snug">
                         Licenciatura en Diseño Multimedia
                       </p>
-
                       <p className="text-neutral-500 font-light text-sm mt-1">
                         Universidad ORT Uruguay · 2022 — 2026
                       </p>
@@ -205,7 +188,6 @@ export function About() {
                   <p className="text-xs uppercase tracking-[0.2em] text-neutral-400 mb-3">
                     Idiomas
                   </p>
-
                   <div className="space-y-2 text-neutral-700">
                     <p>Español — Nativo</p>
                     <p>Inglés — C2 Proficiency</p>
@@ -216,23 +198,19 @@ export function About() {
                   <p className="text-xs uppercase tracking-[0.2em] text-neutral-400 mb-3">
                     Certificaciones
                   </p>
-
                   <div className="space-y-3">
                     <div>
                       <p className="text-neutral-800 leading-snug">
                         Google UX Design Foundations
                       </p>
-
                       <p className="text-neutral-500 font-light text-sm mt-1">
                         Google · 2026
                       </p>
                     </div>
-
                     <div>
                       <p className="text-neutral-800 leading-snug">
                         UX Research & Ideation
                       </p>
-
                       <p className="text-neutral-500 font-light text-sm mt-1">
                         Google · 2026
                       </p>
@@ -242,7 +220,7 @@ export function About() {
               </div>
             </div>
 
-            {/* RIGHT */}
+            {/* RIGHT - sin cambios */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -262,63 +240,51 @@ export function About() {
 
               {/* EXPERIENCE */}
               <div className="mt-14 relative pl-10 border-l border-neutral-300/70 space-y-10">
-                {/* ITEM */}
                 <div className="relative">
                   <div className="absolute -left-[45px] top-2 w-3 h-3 rounded-full bg-rose-400 shadow-[0_0_18px_rgba(244,63,94,0.45)]" />
-
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-2">
                     <div>
                       <h3 className="text-2xl text-neutral-900 tracking-tight">
                         Publicis Impetu
                       </h3>
-
                       <p className="text-neutral-500 font-light">
                         Diseñadora Multimedia
                       </p>
                     </div>
-
                     <span className="text-sm uppercase tracking-[0.18em] text-neutral-400 whitespace-nowrap">
                       2026 — Actualidad
                     </span>
                   </div>
                 </div>
 
-                {/* ITEM */}
                 <div className="relative">
                   <div className="absolute -left-[45px] top-2 w-3 h-3 rounded-full bg-rose-400/70" />
-
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-2">
                     <div>
                       <h3 className="text-2xl text-neutral-900 tracking-tight">
                         Freelance
                       </h3>
-
                       <p className="text-neutral-500 font-light">
                         Diseño visual, motion y desarrollo web
                       </p>
                     </div>
-
                     <span className="text-sm uppercase tracking-[0.18em] text-neutral-400 whitespace-nowrap">
                       2023 — Actualidad
                     </span>
                   </div>
                 </div>
 
-                {/* ITEM */}
                 <div className="relative">
                   <div className="absolute -left-[45px] top-2 w-3 h-3 rounded-full bg-rose-300/70" />
-
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-2">
                     <div>
                       <h3 className="text-2xl text-neutral-900 tracking-tight">
                         Improfit
                       </h3>
-
                       <p className="text-neutral-500 font-light">
                         Diseñadora Multimedia Asistente
                       </p>
                     </div>
-
                     <span className="text-sm uppercase tracking-[0.18em] text-neutral-400 whitespace-nowrap">
                       2025
                     </span>
