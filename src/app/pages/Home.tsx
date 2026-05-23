@@ -23,18 +23,11 @@ export function Home() {
       />
       <Navbar />
       <main>
-        {/*
-          Hero + Philosophy son transparentes: los orbs fijos se ven a través.
-          Hero renderiza el fondo fijo (#hero-orbs, z:0) + el contenido (z:1).
-          Philosophy es el card glass (z:2).
-        */}
+   
         <Hero />
         <Philosophy />
 
-        {/*
-          Process, Projects y Footer tienen fondos sólidos y z-index alto,
-          así tapan los orbs fijos y no se filtra el fondo de colores.
-        */}
+     
         <div style={{ position: "relative", zIndex: 3 }}>
           <Process />
           <About />

@@ -1,3 +1,4 @@
+// Hero.jsx - OPTIMIZADO
 import {
   motion,
   useMotionValue,
@@ -5,13 +6,15 @@ import {
   useTransform,
   useScroll,
 } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export function Hero() {
   const { scrollYProgress } = useScroll();
+  const heroRef = useRef<HTMLElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const [hoverIndex, setHoverIndex] = useState(0);
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
 
   const springConfig = { damping: 50, stiffness: 150, mass: 1 };
   const smoothX = useSpring(mouseX, springConfig);
@@ -22,31 +25,52 @@ export function Hero() {
   const heroScale = useTransform(scrollYProgress, [0, 0.25], [1, 0.96]);
   const heroY = useTransform(scrollYProgress, [0, 0.25], [0, 20]);
 
-  // Simplified blob parallax (only scroll, no autonomous drift)
-  const blobScroll1Y = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const blobScroll2Y = useTransform(scrollYProgress, [0, 1], [0, -50]);
-  const blobScroll3Y = useTransform(scrollYProgress, [0, 1], [0, -150]);
-  const blobScroll4Y = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  // Blob parallax - SOLO cuando hero visible
+  const blobScroll1Y = useTransform(scrollYProgress, [0, 0.3], [0, -100]);
+  const blobScroll2Y = useTransform(scrollYProgress, [0, 0.3], [0, -50]);
+  const blobScroll3Y = useTransform(scrollYProgress, [0, 0.3], [0, -150]);
+  const blobScroll4Y = useTransform(scrollYProgress, [0, 0.3], [0, -80]);
 
-  // Mouse parallax layers (reduced intensity)
-  const x1 = useTransform(smoothX, (v) => v * 0.04);
-  const y1 = useTransform(smoothY, (v) => v * -0.04);
-  const x2 = useTransform(smoothX, (v) => v * 0.12);
-  const y2 = useTransform(smoothY, (v) => v * -0.12);
-  const x3 = useTransform(smoothX, (v) => v * 0.25);
-  const y3 = useTransform(smoothY, (v) => v * -0.25);
-  const x4 = useTransform(smoothX, (v) => v * 0.35);
-  const y4 = useTransform(smoothY, (v) => v * -0.35);
+  // Mouse parallax - SOLO cuando hero visible
+  const x1 = useTransform(smoothX, (v) => (isHeroVisible ? v * 0.04 : 0));
+  const y1 = useTransform(smoothY, (v) => (isHeroVisible ? v * -0.04 : 0));
+  const x2 = useTransform(smoothX, (v) => (isHeroVisible ? v * 0.12 : 0));
+  const y2 = useTransform(smoothY, (v) => (isHeroVisible ? v * -0.12 : 0));
+  const x3 = useTransform(smoothX, (v) => (isHeroVisible ? v * 0.25 : 0));
+  const y3 = useTransform(smoothY, (v) => (isHeroVisible ? v * -0.25 : 0));
+  const x4 = useTransform(smoothX, (v) => (isHeroVisible ? v * 0.35 : 0));
+  const y4 = useTransform(smoothY, (v) => (isHeroVisible ? v * -0.35 : 0));
 
+  // Detectar visibilidad del hero
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeroVisible(entry.intersectionRatio > 0.1);
+      },
+      { threshold: [0, 0.1, 0.5, 1] }
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Mouse tracking - SOLO cuando hero visible
+  useEffect(() => {
+    if (!isHeroVisible) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX - window.innerWidth / 2);
       mouseY.set(e.clientY - window.innerHeight / 2);
     };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
 
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [isHeroVisible, mouseX, mouseY]);
+
+  // Text rotation
   useEffect(() => {
     const interval = setInterval(() => {
       setHoverIndex((prev) => (prev >= styles.length - 1 ? 0 : prev + 1));
@@ -72,7 +96,7 @@ export function Hero() {
       >
         {/* Blob 1 — rose/pink */}
         <motion.div
-          className="absolute will-change-transform"
+          className="absolute"
           style={{
             x: x1,
             y: y1,
@@ -86,6 +110,7 @@ export function Hero() {
             background:
               "radial-gradient(ellipse 70% 65% at 45% 45%, #f43f5e 0%, #fb7185 35%, #fda4af 65%, transparent 80%)",
             opacity: 0.65,
+            willChange: isHeroVisible ? "transform" : "auto",
           }}
           animate={{
             borderRadius: [
@@ -102,7 +127,7 @@ export function Hero() {
 
         {/* Blob 2 — deep blue */}
         <motion.div
-          className="absolute will-change-transform"
+          className="absolute"
           style={{
             x: x4,
             y: y4,
@@ -117,6 +142,7 @@ export function Hero() {
               "radial-gradient(ellipse 60% 65% at 50% 40%, #2563eb 0%, #3b82f6 30%, #93c5fd 60%, transparent 80%)",
             opacity: 0.5,
             mixBlendMode: "multiply",
+            willChange: isHeroVisible ? "transform" : "auto",
           }}
           animate={{
             borderRadius: [
@@ -133,7 +159,7 @@ export function Hero() {
 
         {/* Blob 3 — amber/warm */}
         <motion.div
-          className="absolute will-change-transform"
+          className="absolute"
           style={{
             x: x2,
             y: y2,
@@ -148,6 +174,7 @@ export function Hero() {
               "radial-gradient(ellipse 65% 60% at 45% 50%, #f59e0b 0%, #fbbf24 25%, #fde68a 55%, transparent 80%)",
             opacity: 0.7,
             mixBlendMode: "multiply",
+            willChange: isHeroVisible ? "transform" : "auto",
           }}
           animate={{
             borderRadius: [
@@ -164,7 +191,7 @@ export function Hero() {
 
         {/* Blob 4 — emerald */}
         <motion.div
-          className="absolute will-change-transform"
+          className="absolute"
           style={{
             x: x3,
             y: y3,
@@ -179,6 +206,7 @@ export function Hero() {
               "radial-gradient(ellipse 60% 70% at 50% 50%, #059669 0%, #10b981 35%, #6ee7b7 65%, transparent 82%)",
             opacity: 0.48,
             mixBlendMode: "multiply",
+            willChange: isHeroVisible ? "transform" : "auto",
           }}
           animate={{
             borderRadius: [
@@ -196,6 +224,7 @@ export function Hero() {
 
       {/* Hero content */}
       <section
+        ref={heroRef}
         id="hero"
         className="relative min-h-screen w-full flex flex-col justify-center px-6 md:px-12 py-24"
         style={{ zIndex: 1 }}
@@ -230,13 +259,13 @@ export function Hero() {
               animate={{ opacity: 1, filter: "blur(0px)" }}
               transition={{ duration: 0.6 }}
               className={`
-    text-neutral-900
-    inline-block
-    min-w-[280px]
-    md:min-w-[400px]
-    cursor-default
-    ${styles[hoverIndex]}
-  `}
+                text-neutral-900
+                inline-block
+                min-w-[280px]
+                md:min-w-[400px]
+                cursor-default
+                ${styles[hoverIndex]}
+              `}
             >
               Luciana
             </motion.span>
@@ -250,7 +279,7 @@ export function Hero() {
           >
             <p className="text-xl md:text-2xl text-neutral-600 font-light leading-relaxed">
               Diseño experiencias visuales explorando distintas disciplinas,
-              herramientas y formas de pensar.{" "}
+              herramientas y formas de pensar.
             </p>
           </motion.div>
         </motion.div>
