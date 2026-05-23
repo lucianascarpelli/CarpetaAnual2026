@@ -1,110 +1,165 @@
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, useMotionValue, useSpring, type Variant } from "framer-motion";
+import { useState, useRef } from "react";
 
 type ShapeType = "blob" | "square" | "rectangle" | "circle";
 
+const shapeVariants: Record<ShapeType, Variant> = {
+  blob: {
+    width: 80,
+    height: 80,
+    borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%",
+    rotate: 0,
+    transition: {
+      duration: 0.8,
+    },
+  },
+  square: {
+    width: 150,
+    height: 150,
+    borderRadius: "0%",
+    rotate: 0,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 25,
+    },
+  },
+  rectangle: {
+    width: 220,
+    height: 110,
+    borderRadius: "0%",
+    rotate: 0,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 25,
+    },
+  },
+  circle: {
+    width: 170,
+    height: 170,
+    borderRadius: "50%",
+    rotate: 0,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 25,
+    },
+  },
+};
+
 export function Process() {
-  const [hoveredShape, setHoveredShape] = useState<ShapeType | null>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const [hoveredShape, setHoveredShape] = useState<ShapeType>("blob");
+  const [isInside, setIsInside] = useState(false);
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const smoothX = useSpring(mouseX, { stiffness: 120, damping: 30 });
+  const smoothY = useSpring(mouseY, { stiffness: 120, damping: 30 });
+
+  // ✅ mousemove LOCAL (mucho más liviano)
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (!containerRef.current) return;
+
+    const rect = containerRef.current.getBoundingClientRect();
+
+    const inside =
+      e.clientX >= rect.left &&
+      e.clientX <= rect.right &&
+      e.clientY >= rect.top &&
+      e.clientY <= rect.bottom;
+
+    setIsInside(inside);
+
+    if (inside) {
+      mouseX.set(e.clientX - rect.left);
+      mouseY.set(e.clientY - rect.top);
+    }
+  };
 
   return (
-    <section  className="mt-36 pb-25 pt-20 px-6 md:px-12 text-neutral-50 overflow-hidden relative flex flex-col lg:flex-row items-center justify-center min-h-[70vh] gap-16 bg-neutral-900"  style={{
-        backgroundColor: "#111111",
-        position: "relative",
-        zIndex: 3,
+    <section
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      className="mt-36 pb-25 pt-20 px-6 md:px-12 text-neutral-50 overflow-hidden relative flex flex-col lg:flex-row items-center justify-center min-h-[70vh] gap-16 cursor-none"
+      style={{
         background: "rgba(10,10,10,0.82)",
-           backdropFilter: "blur(5px)",
-        WebkitBackdropFilter: "blur(5px)",
-     
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+      }}
+    >
+      {/* Cursor custom (más liviano) */}
+      {isInside && (
+        <motion.div
+          className="absolute top-0 left-0 w-4 h-4 bg-rose-400 rounded-full pointer-events-none z-50 mix-blend-screen"
+          style={{
+            x: smoothX,
+            y: smoothY,
+            translateX: "-50%",
+            translateY: "-50%",
+            boxShadow: "0 0 20px rgba(244,63,94,0.4)",
+          }}
+          animate={hoveredShape}
+          variants={shapeVariants}
+        />
+      )}
 
-        /* Fondo sólido + z-index alto para tapar el hero-orbs fijo */
-      }}>
+      {/* TEXTO */}
+      <div className="lg:w-1/2 relative z-10 max-w-2xl pointer-events-auto cursor-auto">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight leading-tight text-white">
+            Que cada idea
+            <span className="text-rose-400 font-extrabold italic">
+              <br />
+              encuentre su forma.
+            </span>
+          </h2>
 
-      {/* TEXT */}
-      <div className="lg:w-1/2 max-w-2xl z-10">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight leading-tight text-white"> Que cada idea <span className="text-rose-400 font-extrabold italic"> <br /> encuentre su forma. </span> </h2> <div className="text-lg md:text-xl text-neutral-400 font-light space-y-6"> <p> Trabajo entre diseño gráfico, motion y desarrollo web, combinando herramientas y recursos según lo que cada proyecto necesita. </p> <p> Más que aplicar una fórmula fija, me interesa construir soluciones claras, sensibles y funcionales que respondan al contexto de cada idea. </p>
-        </div>
+          <div className="text-lg md:text-xl text-neutral-400 font-light space-y-6">
+            <p>
+              Trabajo entre diseño gráfico, motion y desarrollo web, combinando
+              herramientas y recursos según lo que cada proyecto necesita.
+            </p>
+            <p>
+              Más que aplicar una fórmula fija, me interesa construir soluciones
+              claras, sensibles y funcionales que respondan al contexto de cada
+              idea.
+            </p>
+          </div>
+        </motion.div>
       </div>
 
       {/* SHAPES */}
-     {/* SHAPES */}
-<div className="lg:w-1/2 flex gap-10 justify-center z-10 relative">
+      <div className="lg:w-1/2 relative flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-12 w-full max-w-[600px] h-[500px] z-10 pointer-events-auto">
+        <div className="flex flex-col gap-8 items-center">
+          <div
+            className="w-[170px] h-[170px] rounded-full border border-neutral-600 bg-neutral-400/10 transition-colors hover:border-rose-400/50"
+            onMouseEnter={() => setHoveredShape("circle")}
+            onMouseLeave={() => setHoveredShape("blob")}
+          />
 
-  {/* CURSOR BLOB LOCAL */}
-  {hoveredShape && (
-    <motion.div
-      layout
-      className="absolute pointer-events-none z-20 bg-rose-400/20 border border-rose-400/40"
-      style={{
-        width: hoveredShape === "rectangle"
-          ? 220
-          : hoveredShape === "square"
-          ? 150
-          : 170,
-        height: hoveredShape === "rectangle"
-          ? 110
-          : hoveredShape === "square"
-          ? 150
-          : 170,
-        borderRadius:
-          hoveredShape === "circle"
-            ? "50%"
-            : hoveredShape === "square"
-            ? "0%"
-            : "30%",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-      }}
-      transition={{ type: "spring", stiffness: 140, damping: 18 }}
-    />
-  )}
+          <div
+            className="w-[220px] h-[110px] border border-neutral-600 bg-neutral-400/10 transition-colors hover:border-rose-400/50"
+            onMouseEnter={() => setHoveredShape("rectangle")}
+            onMouseLeave={() => setHoveredShape("blob")}
+          />
+        </div>
 
-  {/* CIRCLE */}
-  <motion.div
-    onMouseEnter={() => setHoveredShape("circle")}
-    onMouseLeave={() => setHoveredShape(null)}
-    animate={{
-      scale: hoveredShape === "circle" ? 1.05 : 1,
-      borderColor: hoveredShape === "circle" ? "#fb7185" : "#525252",
-      backgroundColor: hoveredShape === "circle"
-        ? "rgba(244,63,94,0.15)"
-        : "rgba(255,255,255,0.04)",
-    }}
-    className="w-[170px] h-[170px] rounded-full border relative z-10"
-  />
-
-  <div className="flex flex-col gap-8 relative z-10">
-
-    {/* RECTANGLE */}
-    <motion.div
-      onMouseEnter={() => setHoveredShape("rectangle")}
-      onMouseLeave={() => setHoveredShape(null)}
-      animate={{
-        scale: hoveredShape === "rectangle" ? 1.05 : 1,
-        borderColor: hoveredShape === "rectangle" ? "#fb7185" : "#525252",
-        backgroundColor: hoveredShape === "rectangle"
-          ? "rgba(244,63,94,0.15)"
-          : "rgba(255,255,255,0.04)",
-      }}
-      className="w-[220px] h-[110px] border"
-    />
-
-    {/* SQUARE */}
-    <motion.div
-      onMouseEnter={() => setHoveredShape("square")}
-      onMouseLeave={() => setHoveredShape(null)}
-      animate={{
-        scale: hoveredShape === "square" ? 1.05 : 1,
-        borderColor: hoveredShape === "square" ? "#fb7185" : "#525252",
-        backgroundColor: hoveredShape === "square"
-          ? "rgba(244,63,94,0.15)"
-          : "rgba(255,255,255,0.04)",
-      }}
-      className="w-[150px] h-[150px] border"
-    />
-
-  </div>
-</div>
+        <div className="flex flex-col gap-8 items-center mt-12 md:mt-24">
+          <div
+            className="w-[150px] h-[150px] border border-neutral-600 bg-neutral-400/10 transition-colors hover:border-rose-400/50"
+            onMouseEnter={() => setHoveredShape("square")}
+            onMouseLeave={() => setHoveredShape("blob")}
+          />
+        </div>
+      </div>
     </section>
   );
 }
