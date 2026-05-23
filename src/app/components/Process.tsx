@@ -7,7 +7,15 @@ export function Process() {
   const [hoveredShape, setHoveredShape] = useState<ShapeType | null>(null);
 
   return (
-    <section className="mt-36 pb-25 pt-20 px-6 md:px-12 text-neutral-50 overflow-hidden relative flex flex-col lg:flex-row items-center justify-center min-h-[70vh] gap-16 bg-neutral-900">
+    <section  className="mt-36 pb-25 pt-20 px-6 md:px-12 text-neutral-50 overflow-hidden relative flex flex-col lg:flex-row items-center justify-center min-h-[70vh] gap-16 bg-neutral-900"  style={{
+        backgroundColor: "#111111",
+        position: "relative",
+        zIndex: 3,
+        background: "rgba(10,10,10,0.82)",
+     
+
+        /* Fondo sólido + z-index alto para tapar el hero-orbs fijo */
+      }}>
 
       {/* TEXT */}
       <div className="lg:w-1/2 max-w-2xl z-10">
