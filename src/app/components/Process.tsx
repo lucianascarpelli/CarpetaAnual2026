@@ -59,7 +59,7 @@ export function Process() {
   const smoothX = useSpring(mouseX, { stiffness: 120, damping: 30 });
   const smoothY = useSpring(mouseY, { stiffness: 120, damping: 30 });
 
-  // ✅ mousemove LOCAL (mucho más liviano)
+
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (!containerRef.current) return;
 
@@ -80,19 +80,32 @@ export function Process() {
   };
 
   return (
-    <section
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      className="mt-36 py-25 px-6 md:px-12 text-neutral-50 overflow-hidden relative flex flex-col lg:flex-row items-center justify-center min-h-[80vh] gap-16 cursor-none"
-      style={{
-        background: "rgba(10,10,10,0.82)",
-        backdropFilter: "blur(6px)",
-        WebkitBackdropFilter: "blur(6px)",
-      }}
-    >
+<section
+  ref={containerRef}
+  onMouseMove={handleMouseMove}
+  className="
+    mt-36
+    py-16 md:py-25
+    px-6 md:px-12
+    text-neutral-50
+    relative
+    flex flex-col lg:flex-row
+    items-center justify-center
+    gap-5
+    cursor-none
+    min-h-auto lg:min-h-[70vh]
+  "
+  style={{
+    background: "rgba(10,10,10,0.82)",
+    backdropFilter: "blur(6px)",
+    WebkitBackdropFilter: "blur(6px)",
+  }}
+
+
+>
       {/* Cursor custom (más liviano) */}
       {isInside && (
-        <motion.div
+        <motion.div id="process"
           className="absolute top-0 left-0 w-4 h-4 bg-rose-400 rounded-full pointer-events-none z-50 mix-blend-screen"
           style={{
             x: smoothX,
@@ -128,7 +141,7 @@ export function Process() {
               herramientas y recursos según lo que cada proyecto necesita.
             </p>
             <p>
-              Más que aplicar una fórmula fija, me interesa construir soluciones
+              No parto desde una herramienta o disciplina, sino desde el problema. Más que aplicar una fórmula fija, me interesa construir soluciones
               claras, sensibles y funcionales que respondan al contexto de cada
               idea.
             </p>
@@ -137,29 +150,31 @@ export function Process() {
       </div>
 
       {/* SHAPES */}
-      <div className="lg:w-1/2 relative flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-12 w-full max-w-[600px] h-[500px] z-10 pointer-events-auto">
-        <div className="flex flex-col gap-8 items-center">
-          <div
-            className="w-[170px] h-[170px] rounded-full border border-neutral-600 bg-neutral-400/10 transition-colors hover:border-rose-400/50"
-            onMouseEnter={() => setHoveredShape("circle")}
-            onMouseLeave={() => setHoveredShape("blob")}
-          />
+<div className="lg:w-1/2 relative flex flex-col md:flex-row items-center justify-center gap-8 lg:gap-12 w-full max-w-[600px] h-auto z-10 pointer-events-auto">  
+  <div className="flex flex-col gap-8 items-center">
+    <div
+      className="w-[170px] h-[170px] rounded-full border border-neutral-600 bg-neutral-400/10 transition-colors hover:border-rose-400/50"
+      onMouseEnter={() => setHoveredShape("circle")}
+      onMouseLeave={() => setHoveredShape("blob")}
+    />
 
-          <div
-            className="w-[220px] h-[110px] border border-neutral-600 bg-neutral-400/10 transition-colors hover:border-rose-400/50"
-            onMouseEnter={() => setHoveredShape("rectangle")}
-            onMouseLeave={() => setHoveredShape("blob")}
-          />
-        </div>
+    <div
+      className="w-[220px] h-[110px] border border-neutral-600 bg-neutral-400/10 transition-colors hover:border-rose-400/50"
+      onMouseEnter={() => setHoveredShape("rectangle")}
+      onMouseLeave={() => setHoveredShape("blob")}
+    />
+  </div>
 
-        <div className="flex flex-col gap-8 items-center mt-12 md:mt-24">
-          <div
-            className="w-[150px] h-[150px] border border-neutral-600 bg-neutral-400/10 transition-colors hover:border-rose-400/50"
-            onMouseEnter={() => setHoveredShape("square")}
-            onMouseLeave={() => setHoveredShape("blob")}
-          />
-        </div>
-      </div>
+  <div className="flex flex-col gap-8 items-center mt-6 md:mt-24">
+    <div
+      className="w-[150px] h-[150px] border border-neutral-600 bg-neutral-400/10 transition-colors hover:border-rose-400/50"
+      onMouseEnter={() => setHoveredShape("square")}
+      onMouseLeave={() => setHoveredShape("blob")}
+    />
+  </div>
+
+</div>
+      
     </section>
   );
 }

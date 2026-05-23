@@ -195,7 +195,7 @@ export function About() {
                 Sobre mí
               </p>
 
-              <h2 className="text-4xl md:text-6xl leading-[0.95] tracking-tight text-neutral-900 max-w-3xl">
+              <h2 className="text-4xl md:text-6xl leading-[0.95] tracking-tight text-neutral-900 text-bold  max-w-3xl">
                 Me interesa construir ideas desde la{" "}
                 <span className="italic text-rose-400">exploración visual</span>{" "}
                 y el cruce entre disciplinas.

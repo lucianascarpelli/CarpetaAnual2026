@@ -3,10 +3,15 @@ import { motion } from "framer-motion";
 import { ArrowLeftCircle } from "lucide-react";
 import { projects } from "../data/projects";
 import { Footer } from "../components/Footer";
+import { useEffect } from "react";
 
 export function ProjectDetail() {
   const { id } = useParams();
   const project = projects.find((p) => p.id === id);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   if (!project) {
     return (
@@ -15,11 +20,13 @@ export function ProjectDetail() {
       </div>
     );
   }
+  
 
   const isVideo = (file: string) =>
     file.endsWith(".mp4") ||
     file.endsWith(".webm") ||
     file.endsWith(".mov");
+
 
   return (
     <motion.div className="bg-white min-h-screen text-neutral-900">
@@ -108,13 +115,13 @@ export function ProjectDetail() {
         <div className="w-full px-6">
           <div className="max-w-7xl mx-auto">
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
 
               {project.gallery.map((item, i) => (
                 <motion.div
                   key={i}
                   className="overflow-hidden rounded-xl bg-neutral-100"
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.02}}
                 >
                   {isVideo(item) ? (
                     <video
