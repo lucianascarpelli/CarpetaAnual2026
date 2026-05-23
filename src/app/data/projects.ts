@@ -49,24 +49,30 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "plataforma-ecommerce",
-    title: "Plataforma E-commerce",
-    category: "Diseño UX/UI / Web",
-    img: "https://images.unsplash.com/photo-1704115676100-3905a8d51524?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGFydCUyMGRlc2lnbnxlbnwxfHx8fDE3Nzc5NTI4NDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    need: "Rediseñar la experiencia de compra de una marca boutique, integrando su estética visual en una tienda funcional.",
-    tools: ["Figma", "WordPress", "HTML, CSS y JavaScript"],
-    solution:
-      "A partir de la identidad visual, diseñé y desarrollé el sitio web, creé personajes para acompañar la comunicación, produje piezas audiovisuales (desde videos educativos animados hasta un video institucional) y generé contenidos reutilizables para redes sociales.",
-    year: "2024",
-    client: "Boutique Nómade",
-    pieces: "Diseño UX/UI, Desarrollo Web, Custom Theme",
-    description:
-      "Buscamos un equilibrio perfecto entre una estética refinada y un proceso de compra sin fricciones. Se optimizó el recorrido del usuario, destacando la calidad fotográfica y simplificando el checkout.",
-    gallery: [
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      "https://images.unsplash.com/photo-1507238692062-710e5bb94ee5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-    ],
-  },
+  id: "amora",
+  title: "Amora – Skincare Brand",
+  category: "DISEÑO GRÁFICO | BRANDING | DISEÑO WEB",
+  img: "/img/ahora/amora4.webp",
+  need: "Desarrollar una identidad visual y una landing page para una marca ficticia de skincare enfocada en ingredientes naturales, limpios y libres de químicos agresivos.",
+  tools: [
+    "Adobe Illustrator",
+    "Adobe Photoshop",
+    "Figma"
+  ],
+  solution: "Creé una identidad de marca completa partiendo del concepto de pureza y naturalidad, desarrollando el sistema visual, el logotipo, recursos gráficos y packaging. Luego diseñé una landing page coherente con la estética de la marca, priorizando una experiencia visual limpia, minimalista y enfocada en el producto.",
+  year: "2023",
+  client: "Proyecto académico – marca ficticia",
+  pieces: "Logo, Sistema de marca, Packaging, Elementos gráficos, Landing page",
+  description: "Amora es un proyecto de branding y diseño digital desarrollado como exploración de una marca de cuidado de la piel basada en ingredientes naturales y una estética limpia. El objetivo fue construir una identidad visual coherente desde cero, traduciendo valores como pureza, suavidad y confianza en un sistema gráfico aplicable tanto a packaging como a una experiencia web.",
+  gallery: [
+    "/img/ahora/amora4.webp",
+    "/img/ahora/amora1.webp",
+    "/img/ahora/amora2.webp",
+    "/img/ahora/amora3.webp",
+    "/img/ahora/amora5.webp",
+    "/img/ahora/amora6.webp"
+  ]
+},
   {
     id: "campana-audiovisual",
     title: "Campaña Audiovisual",
