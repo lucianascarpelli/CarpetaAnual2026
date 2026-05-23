@@ -12,6 +12,8 @@ export function Process() {
         position: "relative",
         zIndex: 3,
         background: "rgba(10,10,10,0.82)",
+           backdropFilter: "blur(5px)",
+        WebkitBackdropFilter: "blur(5px)",
      
 
         /* Fondo sólido + z-index alto para tapar el hero-orbs fijo */
