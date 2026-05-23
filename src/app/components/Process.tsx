@@ -11,20 +11,7 @@ export function Process() {
 
       {/* TEXT */}
       <div className="lg:w-1/2 max-w-2xl z-10">
-        <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white">
-          Que cada idea
-          <span className="text-rose-400 italic">
-            <br /> encuentre su forma.
-          </span>
-        </h2>
-
-        <div className="text-lg text-neutral-400 space-y-6">
-          <p>
-            Trabajo entre diseño gráfico, motion y desarrollo web.
-          </p>
-          <p>
-            Construyo soluciones claras y sensibles según cada contexto.
-          </p>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight leading-tight text-white"> Que cada idea <span className="text-rose-400 font-extrabold italic"> <br /> encuentre su forma. </span> </h2> <div className="text-lg md:text-xl text-neutral-400 font-light space-y-6"> <p> Trabajo entre diseño gráfico, motion y desarrollo web, combinando herramientas y recursos según lo que cada proyecto necesita. </p> <p> Más que aplicar una fórmula fija, me interesa construir soluciones claras, sensibles y funcionales que respondan al contexto de cada idea. </p>
         </div>
       </div>
 
