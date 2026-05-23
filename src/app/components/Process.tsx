@@ -1,5 +1,6 @@
+// Process.jsx - OPTIMIZADO
 import { motion, useMotionValue, useSpring, type Variant } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 
 type ShapeType = "blob" | "square" | "rectangle" | "circle";
 
@@ -9,42 +10,28 @@ const shapeVariants: Record<ShapeType, Variant> = {
     height: 80,
     borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%",
     rotate: 0,
-    transition: {
-      duration: 0.8,
-    },
+    transition: { duration: 0.8 },
   },
   square: {
     width: 150,
     height: 150,
     borderRadius: "0%",
     rotate: 0,
-    transition: {
-      type: "spring",
-      stiffness: 120,
-      damping: 25,
-    },
+    transition: { type: "spring", stiffness: 120, damping: 25 },
   },
   rectangle: {
     width: 220,
     height: 110,
     borderRadius: "0%",
     rotate: 0,
-    transition: {
-      type: "spring",
-      stiffness: 120,
-      damping: 25,
-    },
+    transition: { type: "spring", stiffness: 120, damping: 25 },
   },
   circle: {
     width: 170,
     height: 170,
     borderRadius: "50%",
     rotate: 0,
-    transition: {
-      type: "spring",
-      stiffness: 120,
-      damping: 25,
-    },
+    transition: { type: "spring", stiffness: 120, damping: 25 },
   },
 };
 
@@ -59,38 +46,49 @@ export function Process() {
   const smoothX = useSpring(mouseX, { stiffness: 120, damping: 30 });
   const smoothY = useSpring(mouseY, { stiffness: 120, damping: 30 });
 
-  // ✅ mousemove LOCAL (mucho más liviano)
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (!containerRef.current) return;
+  // Usar useCallback para evitar recrear la función
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      if (!containerRef.current) return;
 
-    const rect = containerRef.current.getBoundingClientRect();
+      const rect = containerRef.current.getBoundingClientRect();
+      const inside =
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom;
 
-    const inside =
-      e.clientX >= rect.left &&
-      e.clientX <= rect.right &&
-      e.clientY >= rect.top &&
-      e.clientY <= rect.bottom;
+      setIsInside(inside);
 
-    setIsInside(inside);
+      if (inside) {
+        // Usar requestAnimationFrame para throttling implícito
+        requestAnimationFrame(() => {
+          mouseX.set(e.clientX - rect.left);
+          mouseY.set(e.clientY - rect.top);
+        });
+      }
+    },
+    [mouseX, mouseY]
+  );
 
-    if (inside) {
-      mouseX.set(e.clientX - rect.left);
-      mouseY.set(e.clientY - rect.top);
-    }
-  };
+  const handleMouseLeave = useCallback(() => {
+    setIsInside(false);
+  }, []);
 
   return (
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className="mt-36 pb-25 pt-20 px-6 md:px-12 text-neutral-50 overflow-hidden relative flex flex-col lg:flex-row items-center justify-center min-h-[70vh] gap-16 cursor-none"
       style={{
         background: "rgba(10,10,10,0.82)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
+        zIndex: 2,
       }}
     >
-      {/* Cursor custom (más liviano) */}
+      {/* Cursor custom - solo renderiza cuando está dentro */}
       {isInside && (
         <motion.div
           className="absolute top-0 left-0 w-4 h-4 bg-rose-400 rounded-full pointer-events-none z-50 mix-blend-screen"
