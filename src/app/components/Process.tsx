@@ -83,11 +83,11 @@ export function Process() {
     <section
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="mt-36 pb-25 pt-20 px-6 md:px-12 text-neutral-50 overflow-hidden relative flex flex-col lg:flex-row items-center justify-center min-h-[70vh] gap-16 cursor-none"
+      className="mt-36 py-25 px-6 md:px-12 text-neutral-50 overflow-hidden relative flex flex-col lg:flex-row items-center justify-center min-h-[80vh] gap-16 cursor-none"
       style={{
         background: "rgba(10,10,10,0.82)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
+        backdropFilter: "blur(6px)",
+        WebkitBackdropFilter: "blur(6px)",
       }}
     >
       {/* Cursor custom (más liviano) */}
