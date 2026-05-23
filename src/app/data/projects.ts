@@ -52,7 +52,7 @@ export const projects: Project[] = [
   id: "amora",
   title: "Amora – Skincare Brand",
   category: "DISEÑO GRÁFICO | BRANDING | DISEÑO WEB",
-  img: "/img/ahora/amora4.webp",
+  img: "/img/amora/amora4.webp",
   need: "Desarrollar una identidad visual y una landing page para una marca ficticia de skincare enfocada en ingredientes naturales, limpios y libres de químicos agresivos.",
   tools: [
     "Adobe Illustrator",
@@ -61,16 +61,16 @@ export const projects: Project[] = [
   ],
   solution: "Creé una identidad de marca completa partiendo del concepto de pureza y naturalidad, desarrollando el sistema visual, el logotipo, recursos gráficos y packaging. Luego diseñé una landing page coherente con la estética de la marca, priorizando una experiencia visual limpia, minimalista y enfocada en el producto.",
   year: "2023",
-  client: "Proyecto académico – marca ficticia",
+  client: "Amora – marca ficticia",
   pieces: "Logo, Sistema de marca, Packaging, Elementos gráficos, Landing page",
   description: "Amora es un proyecto de branding y diseño digital desarrollado como exploración de una marca de cuidado de la piel basada en ingredientes naturales y una estética limpia. El objetivo fue construir una identidad visual coherente desde cero, traduciendo valores como pureza, suavidad y confianza en un sistema gráfico aplicable tanto a packaging como a una experiencia web.",
   gallery: [
-    "/img/ahora/amora4.webp",
-    "/img/ahora/amora1.webp",
-    "/img/ahora/amora2.webp",
-    "/img/ahora/amora3.webp",
-    "/img/ahora/amora5.webp",
-    "/img/ahora/amora6.webp"
+    "/img/amora/amora4.webp",
+    "/img/amora/amora1.webp",
+    "/img/amora/amora2.webp",
+    "/img/amora/amora3.webp",
+    "/img/amora/amora5.webp",
+    "/img/amora/amora6.webp"
   ]
 },
   {
