@@ -3,6 +3,7 @@ export type Project = {
   title: string;
   category: string;
   img: string;
+  imgcover: string;
   need: string;
   tools: string[];
   solution: string;
@@ -20,6 +21,7 @@ export const projects: Project[] = [
     category:
       "DISEÑO Y DESARROLLO WEB | MOTION GRAPHICS | EDICIÓN DE VIDEO | DISEÑO GRÁFICO",
     img: "/img/fusl/IMAGEN_2.png",
+    imgcover: "/img/fusl/IMAGEN_2.png",
     need: "Resolver integralmente las necsidades comunicacionales y de diseño de una fundación joven",
     tools: [
       "HTML, CSS, JAVASCRIPT, REACT JS",
@@ -53,6 +55,8 @@ export const projects: Project[] = [
   title: "Amora – Skincare Brand",
   category: "DISEÑO GRÁFICO | BRANDING | DISEÑO WEB",
   img: "/img/amora/AMORA4.webp",
+  imgcover: "/img/amora/AMORA7.webp",
+  
   need: "Desarrollar una identidad visual y una landing page para una marca ficticia de skincare enfocada en ingredientes naturales, limpios y libres de químicos agresivos.",
   tools: [
     "Adobe Illustrator",
@@ -74,79 +78,125 @@ export const projects: Project[] = [
   ]
 },
   {
-    id: "campana-audiovisual",
-    title: "Campaña Audiovisual",
-    category: "Diseño Audiovisual",
-    img: "https://images.unsplash.com/photo-1618788372246-79faff0c3742?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1eCUyMGRlc2lnbiUyMHdvcmtzcGFjZXxlbnwxfHx8fDE3Nzc5NTI4NDV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    need: "Transmitir los valores de una marca emergente a través de una pieza de video de formato corto y alto impacto.",
-    tools: ["Adobe Premiere", "CapCut", "Adobe After Effects"],
-    solution:
-      "Mediante un montaje rítmico en Premiere y retoques rápidos en CapCut, combinados con placas animadas.",
-    year: "2023",
-    client: "Senda Indumentaria",
-    pieces: "Reels, Spot Promocional, Motion Graphics",
-    description:
-      "Se requería conectar con una audiencia joven a través de plataformas como Instagram y TikTok. Trabajamos un montaje dinámico con tipografías impactantes y diseño de sonido inmersivo.",
-    gallery: [
-      "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      "https://images.unsplash.com/photo-1536240478700-b869070f9279?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-    ],
-  },
+  id: "quien-para",
+  title: "¿Quién Para?",
+  category: "DISEÑO UX/UI | DISEÑO GRÁFICO | RESEARCH",
+  img: "/img/quienpara/Quienpara5.webp",
+  imgcover: "/img/quienpara/Quienpara3.webp",
+  need:
+    "Diseñar una experiencia digital que facilite la conexión entre personas con gustos similares para asistir a eventos de entretenimiento local.",
+  tools: [
+    "Figma",
+    "Adobe Illustrator",
+    "Maze"
+  ],
+  solution:
+    "Desarrollé la identidad visual y el prototipo de alta fidelidad de la aplicación, combinando research con diseño de experiencia para construir una propuesta enfocada en lo social, la exploración y la conexión entre usuarios. A partir de tests y validaciones en Maze, trabajé una interfaz intuitiva, dinámica y adaptable a distintos perfiles de usuario.",
+  year: "2024",
+  client: "Proyecto académico",
+  pieces:
+    "Identidad visual, Sistema gráfico, Prototipo de alta fidelidad",
+  description:
+    "¿Quién Para? es un proyecto de diseño UX/UI centrado en la creación de una aplicación que permite a sus usuarios descubrir eventos de entretenimiento local y encontrar personas con intereses similares para asistir juntos. El proyecto surgió desde la necesidad de explorar cómo el diseño digital puede facilitar conexiones sociales reales, integrando investigación, estrategia visual y prototipado interactivo en una experiencia pensada para sentirse cercana, flexible y contemporánea.",
+  gallery: [
+    "/img/quienpara/Quienpara1.webp",
+    "/img/quienpara/Quienpara2.webp",
+    "/img/quienpara/Quienpara3.webp",
+    "/img/quienpara/Quienpara4.webp"
+  ]
+},
+{
+  id: "camino-de-la-cosecha",
+  title: "Camino de la Cosecha",
+  category:
+    "PROGRAMACIÓN | ELECTRÓNICA | DISEÑO GRÁFICO | EDICIÓN DE VIDEO",
+  img:  "/img/caminodelacosecha/camino6.webp",
+  imgcover: "/img/caminodelacosecha/camino5.webp",
+  need:
+    "Desarrollar una experiencia educativa e interactiva para el cierre del recorrido de una fábrica de arroz, integrando juego, tecnología y comunicación visual.",
+  tools: [
+    "Arduino",
+    "Adobe Illustrator",
+    "Adobe Photoshop",
+    "Adobe After Effects",
+    "Adobe Premiere"
+  ],
+  solution:
+    "En colaboración con estudiantes de Diseño Industrial, desarrollamos un juego educativo en versiones móvil y de mesa. Desde el área de Diseño Multimedia estuve a cargo de la electrónica, el cableado y la programación del sistema mediante Arduino, además del desarrollo de la identidad visual del proyecto y la edición del video promocional. El enfoque estuvo en integrar distintas disciplinas para construir una experiencia interactiva coherente tanto a nivel funcional como visual.",
+  year: "2025",
+  client: "Proyecto interdisciplinario",
+  pieces:
+    "Juego interactivo, Identidad visual, Video promocional",
+  description:
+    "Camino de la Cosecha es un proyecto interdisciplinario desarrollado junto a estudiantes de Diseño Industrial, centrado en la creación de un juego educativo pensado para el cierre del recorrido de una fábrica de arroz. El proyecto combinó electrónica, programación, diseño visual y audiovisual para generar una experiencia interactiva accesible y dinámica. Además del desarrollo técnico del sistema con Arduino, trabajé en la construcción de la identidad visual del juego y en la producción del material audiovisual de presentación.",
+  gallery: [
+     "/img/caminodelacosecha/camino2.webp",
+    "/img/caminodelacosecha/camino1.webp",
+   
+    "/img/caminodelacosecha/camino3.webp",
+    "/img/caminodelacosecha/camino4.webp",
+
+  ]
+},
+{
+  id: "read-your-mind",
+  title: "Read Your Mind",
+  category: "MOTION GRAPHICS | DISEÑO AUDIOVISUAL",
+  img: "/img/Readyourmind/Readyourmind5.webp",
+  imgcover: "/img/Readyourmind/Readyourmind4.webp",
+  need:
+    "Desarrollar una pieza audiovisual de motion graphics con fuerte énfasis en ritmo, composición visual y exploración estética a partir de la música.",
+  tools: [
+    "Adobe After Effects",
+    "Adobe Illustrator",
+    "Adobe Photoshop"
+  ],
+  solution:
+    "A partir de una base musical como eje narrativo, construí una pieza de motion graphics explorando una estética inspirada en los 2000, combinando tipografías, texturas y recursos visuales. El foco estuvo en la composición dinámica, el ritmo visual y la integración de elementos gráficos para generar una experiencia audiovisual coherente y envolvente.",
+  year: "2023",
+  client: "Proyecto académico",
+  pieces: "Video animado",
+  description:
+    "Read Your Mind es un proyecto de motion graphics donde la exploración visual se construye a partir del ritmo musical y una estética inspirada en los 2000. El trabajo se centra en la experimentación con composición, tipografía y texturas, buscando generar una pieza audiovisual dinámica donde el sonido y la imagen funcionan de manera integrada.",
+  gallery: [
+    "/img/Readyourmind/Readyourmind1.webp",
+    "/img/Readyourmind/Readyourmind2.webp",
+    "/img/Readyourmind/Readyourmind3.mp4"
+  ]
+},
+
   {
-    id: "app-gestion",
-    title: "App Móvil de Gestión",
-    category: "Diseño UX/UI",
-    img: "https://images.unsplash.com/photo-1759661881353-5b9cc55e1cf4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNobm9sb2d5JTIwY29kaW5nJTIwc2NyZWVufGVufDF8fHx8MTc3Nzk1Mjg0Nnww&ixlib=rb-4.1.0&q=80&w=1080",
-    need: "Simplificar el registro de gastos diarios mediante una interfaz amigable que invite a la constancia del usuario.",
-    tools: ["Figma", "Adobe Illustrator"],
-    solution:
-      "Diseñé una interfaz clara apoyada en ilustraciones amables creadas en Illustrator, validando todo con prototipos en Figma.",
-    year: "2024",
-    client: "FinTech Startup",
-    pieces: "UI Kits, Wireframes, Prototipos",
-    description:
-      "A través de investigación con usuarios, descubrimos que el principal obstáculo para el registro de gastos era la fricción visual y cognitiva. Optamos por un diseño limpio y recompensas visuales sutiles.",
-    gallery: [
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-    ],
-  },
-  {
-    id: "sitio-institucional",
-    title: "Sitio Institucional",
-    category: "Diseño y Desarrollo Web",
-    img: "https://images.unsplash.com/photo-1748525938712-a065b4396ba4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpbnRlcmFjdGl2ZSUyMGV4aGliaXRpb258ZW58MXx8fHwxNzc3OTUyODkxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    need: "Dar presencia digital moderna y confiable a una firma de consultoría con información técnica compleja.",
-    tools: ["Figma", "HTML, CSS y JavaScript"],
-    solution:
-      "Estructuré la arquitectura de la información y la diseñé en Figma, para luego construir un frontend ligero y responsivo.",
-    year: "2022",
-    client: "Consultora Nexus",
-    pieces: "Diseño Web, Maquetación, Responsive",
-    description:
-      "Transformar documentos densos en una experiencia navegable. Se hizo hincapié en la jerarquía tipográfica, el uso de micro-interacciones para aligerar la lectura y la accesibilidad de la web.",
-    gallery: [
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-    ],
-  },
-  {
-    id: "contenido-redes",
-    title: "Contenido Estratégico RRSS",
-    category: "Diseño Audiovisual / Gráfico",
-    img: "https://images.unsplash.com/photo-1459908676235-d5f02a50184b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHdvcmtzaG9wfGVufDF8fHx8MTc3Nzk1Mjg0Nnww&ixlib=rb-4.1.0&q=80&w=1080",
-    need: "Generar plantillas y recursos en movimiento que la marca pueda iterar rápidamente para sus canales sociales.",
-    tools: ["Canva", "CapCut", "Adobe Photoshop"],
-    solution:
-      "Sistematicé la identidad visual de la marca estructurando plantillas accesibles en Canva, apoyadas por recortes hechos en Photoshop.",
-    year: "2023",
-    client: "Agencia de Marketing Luma",
-    pieces: "Plantillas Editables, Guidelines, Motion Templates",
-    description:
-      'El cliente necesitaba autonomía. En lugar de entregarles piezas finales, se diseñó un "toolkit" con componentes reutilizables, paletas, y guías de animación rápida en herramientas accesibles.',
-    gallery: [
-      "https://images.unsplash.com/photo-1611162617474-5b21e879e113?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-    ],
-  },
+  id: "decia-hnos",
+  title: "Decia Hnos Inmobiliaria",
+  category: "DISEÑO WEB | UI DESIGN | FRONT-END DEVELOPMENT",
+  img: "/img/decia/decia3.webp",
+  imgcover: "/img/decia/decia1.webp",
+  need:
+    "Diseñar y desarrollar una plataforma web para una inmobiliaria con el objetivo de presentar propiedades de forma clara, accesible y con una navegación intuitiva.",
+  tools: [
+    "Figma",
+    "HTML",
+    "CSS",
+    "JavaScript"
+  ],
+  solution:
+    "Diseñé la interfaz completa en Figma y posteriormente desarrollé el front-end utilizando HTML, CSS y JavaScript. El enfoque estuvo en la claridad visual, la jerarquía de información y la facilidad de navegación para la búsqueda de propiedades. El proyecto fue entregado listo para su posterior integración con base de datos por parte del equipo de desarrollo.",
+  year: "2026",
+  client: "Inmobiliaria Decia Hnos",
+  pieces:
+    "UI Design en Figma, Front-end development",
+  description:
+    "Diseño y desarrollo del sitio web para la inmobiliaria Decia Hnos, con el objetivo de mejorar la presentación de propiedades y optimizar la experiencia de navegación. El trabajo incluyó el diseño de la interfaz en Figma y la implementación del front-end, dejando la estructura preparada para su integración con base de datos por un equipo de desarrollo externo.",
+  gallery: [
+   
+    "/img/decia/decia2.webp",
+      "/img/decia/decia6.webp",
+    "/img/decia/decia4.webp",
+  
+  
+      "/img/decia/decia5.webp"
+  ]
+}, 
+
+
 ];

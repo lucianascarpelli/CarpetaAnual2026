@@ -74,7 +74,7 @@ export function Projects() {
                   </div>
                   <motion.img
                     layoutId={`card-img-${project.id}`}
-                    src={project.img}
+                    src={project.imgcover}
                     alt={project.title}
                     className={`w-100 ${index % 2 === 0 ? "h-[420px]" : "h-[300px]"} object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out`}
                   />

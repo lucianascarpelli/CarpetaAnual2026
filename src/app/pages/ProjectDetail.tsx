@@ -9,9 +9,12 @@ export function ProjectDetail() {
   const { id } = useParams();
   const project = projects.find((p) => p.id === id);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+useEffect(() => {
+  window.scrollTo({
+    top: 0,
+    behavior: "instant",
+  });
+}, []);
 
   if (!project) {
     return (
@@ -55,7 +58,7 @@ export function ProjectDetail() {
         </div>
 
         {/* HERO */}
-        <div className="w-full h-[60vh] mb-16">
+        <div className="w-full h-[80vh] mb-16">
           <img
             src={project.img}
             className="w-full h-full object-cover"
@@ -112,36 +115,43 @@ export function ProjectDetail() {
         </div>
 
         {/* GALLERY (UNIFORME / FULL WIDTH GRID) */}
-        <div className="w-full px-6">
-          <div className="max-w-7xl mx-auto">
+       {/* GALLERY (UNIFORME / FULL WIDTH GRID) */}
+<div className="w-full px-6">
+  <div className="max-w-7xl mx-auto">
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
 
-              {project.gallery.map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="overflow-hidden rounded-xl bg-neutral-100"
-                  whileHover={{ scale: 1.02}}
-                >
-                  {isVideo(item) ? (
-                    <video
-                      src={item}
-                      controls
-                      className="w-full h-full object-cover aspect-video"
-                    />
-                  ) : (
-                    <img
-                      src={item}
-                      className="w-full h-full object-cover aspect-[4/3]"
-                    />
-                  )}
-                </motion.div>
-              ))}
+      {project.gallery.map((item, i) => {
+        const video = isVideo(item);
 
-            </div>
+        return (
+          <motion.div
+            key={i}
+            className={`overflow-hidden rounded-xl bg-neutral-100 ${
+              video ? "lg:col-span-2" : ""
+            }`}
+            whileHover={{ scale: 1.02 }}
+          >
+            {video ? (
+              <video
+                src={item}
+                controls
+                className="w-full h-full object-cover aspect-video"
+              />
+            ) : (
+              <img
+                src={item}
+                className="w-full h-full object-cover aspect-[1/1]"
+              />
+            )}
+          </motion.div>
+        );
+      })}
 
-          </div>
-        </div>
+    </div>
+
+  </div>
+</div>
 
       </main>
 
