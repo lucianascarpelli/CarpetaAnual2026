@@ -135,6 +135,7 @@ export const projects: Project[] = [
    
     "/img/caminodelacosecha/camino3.webp",
     "/img/caminodelacosecha/camino4.webp",
+     "/img/caminodelacosecha/camino7.mp4",
 
   ]
 },
@@ -143,7 +144,7 @@ export const projects: Project[] = [
   title: "Read Your Mind",
   category: "MOTION GRAPHICS | DISEÑO AUDIOVISUAL",
   img: "/img/Readyourmind/Readyourmind5.webp",
-  imgcover: "/img/Readyourmind/Readyourmind4.webp",
+  imgcover: "/img/Readyourmind/readyourmind4.webp",
   need:
     "Desarrollar una pieza audiovisual de motion graphics con fuerte énfasis en ritmo, composición visual y exploración estética a partir de la música.",
   tools: [
