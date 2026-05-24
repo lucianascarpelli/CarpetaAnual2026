@@ -106,9 +106,9 @@ useEffect(() => {
             <div className="mt-10 border-t pt-6">
               <p className="text-sm text-neutral-700">
                 <span className="font-semibold block mb-2">
-                  Solución
+                 Proceso
                 </span>
-                {project.solution}
+                {project. process}
               </p>
             </div>
           </div>
