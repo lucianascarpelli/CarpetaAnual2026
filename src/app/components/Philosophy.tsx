@@ -116,7 +116,7 @@ export function Philosophy() {
             >
               <h2 className="mb-10 text-3xl font-bold leading-tight tracking-tight text-neutral-900 md:text-5xl lg:text-6xl">
                 Nunca me sentí cómoda trabajando desde{" "}
-                <span className="italic text-rose-400">un único lugar</span>.
+                <span className="italic font-extrabold text-rose-400">un único lugar</span>.
               </h2>
 
               <p

@@ -78,13 +78,15 @@ export function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  const styles = [
-    "font-sans font-semibold tracking-tight",
-    "font-serif italic tracking-tight",
-    "font-sans font-light tracking-wide",
-    "font-serif font-light italic tracking-tight",
-  ];
+const styles = [
+  '[font-family:"Helvetica_Neue",Helvetica,Arial,sans-serif] font-bold tracking-tight',
 
+  '[font-family:Georgia,"Times_New_Roman",serif] italic tracking-tight',
+
+  '[font-family:"Helvetica_Neue",Helvetica,Arial,sans-serif] font-light tracking-wide',
+
+  '[font-family:Georgia,"Times_New_Roman",serif] font-light italic tracking-tight',
+];
   return (
     <>
       {/* Fixed atmospheric background */}
