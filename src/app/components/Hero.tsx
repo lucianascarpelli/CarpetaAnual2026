@@ -201,25 +201,26 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-6xl md:text-8xl lg:text-[8rem] font-bold tracking-tighter leading-none mb-12 whitespace-nowrap flex flex-wrap md:flex-nowrap items-center gap-x-6"
-          >
+className="text-6xl md:text-8xl lg:text-[8rem] font-bold tracking-tighter leading-none mb-12 flex flex-wrap md:flex-nowrap items-center gap-x-6"          >
             <span>Hola, soy</span>
-            <motion.span
-              key={hoverIndex}
-              initial={{ opacity: 0.4, filter: "blur(6px)" }}
-              animate={{ opacity: 1, filter: "blur(0px)" }}
-              transition={{ duration: 0.6 }}
-              className={`
-                text-neutral-900
-                inline-block
-                min-w-[280px]
-                md:min-w-[400px]
-                cursor-default
-                ${styles[hoverIndex]}
-              `}
-            >
-              Luciana
-            </motion.span>
+        <motion.span
+  key={hoverIndex}
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5 }}
+  className={`
+    text-neutral-900
+    inline-flex
+    items-center
+    w-[340px]
+    md:w-[460px]
+    py-2
+    cursor-default
+    ${styles[hoverIndex]}
+  `}
+>
+  Luciana
+</motion.span>
           </motion.h1>
 
           <motion.div
