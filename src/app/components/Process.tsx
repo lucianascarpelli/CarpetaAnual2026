@@ -128,7 +128,7 @@ export function Process() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight leading-tight text-white">
-            Que cada idea
+            Que cada proyecto
             <span className="text-rose-400 font-extrabold italic">
               <br />
               encuentre su forma.
