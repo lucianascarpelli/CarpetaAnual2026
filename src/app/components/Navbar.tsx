@@ -79,12 +79,17 @@ export function Navbar() {
       </div>
 
       {/* MOBILE TOGGLE */}
-      <button
-        className="md:hidden pointer-events-auto z-50"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
+     <button
+  className={`
+    md:hidden
+    pointer-events-auto
+    z-50
+    ${isOpen ? "text-black" : "text-white"}
+  `}
+  onClick={() => setIsOpen(!isOpen)}
+>
+  {isOpen ? <X size={24} /> : <Menu size={24} />}
+</button>
 
       {/* MOBILE MENU */}
       {isOpen && (
@@ -94,6 +99,7 @@ export function Navbar() {
           transition={{ duration: 0.25 }}
           className="
             fixed
+            pointer-events-auto
             inset-0
             bg-white/15
             backdrop-blur-xl
@@ -106,12 +112,7 @@ export function Navbar() {
             md:hidden
           "
         >
-          <button
-            className="absolute top-6 right-6 text-black"
-            onClick={() => setIsOpen(false)}
-          >
-            <X size={24} />
-          </button>
+       
 
           <button
             onClick={() => scrollTo("about")}

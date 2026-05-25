@@ -81,6 +81,7 @@ export function Process() {
 
   return (
 <section
+ id="process"
   ref={containerRef}
   onMouseMove={handleMouseMove}
   className="
