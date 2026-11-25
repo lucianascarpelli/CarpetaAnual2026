@@ -31,20 +31,29 @@ useEffect(() => {
     file.endsWith(".mov");
 
 
-  // Composiciones según las proporciones de las piezas existentes.
-  const layouts: Record<string, number[][]> = {
-    "fundacion-usl": [[0], [1], [2, 5], [3], [4]],
-    "amora": [[0], [1, 3], [2], [4, 5]],
-    "quien-para": [[0, 1], [2, 3]],
-    "camino-de-la-cosecha": [[0, 1], [2, 3], [4]],
-    "read-your-mind": [[2], [0, 1]],
-    "decia-hnos": [[0, 1], [2, 3]],
+  // Las composiciones se vinculan a los archivos, no a sus índices.
+  const layouts: Record<string, string[][]> = {
+    "fundacion-usl": [["/img/fusl/VIDEO PRESENTACION .mp4"], ["/img/fusl/sitio web fusl.mp4"], ["/img/fusl/IMAGEN_1.jpg", "/img/fusl/IMAGEN_3.jpg"], ["/img/fusl/IMAGEN_2.png"], ["/img/fusl/IMAGEN_4.jpg"]],
+    "amora": [["/img/amora/AMORA4.webp"], ["/img/amora/AMORA1.webp", "/img/amora/AMORA3.webp"], ["/img/amora/AMORA2.webp"], ["/img/amora/AMORA5.webp", "/img/amora/AMORA6.webp"]],
+    "quien-para": [["/img/quienpara/Quienpara1.webp", "/img/quienpara/Quienpara2.webp"], ["/img/quienpara/Quienpara3.webp", "/img/quienpara/Quienpara4.webp"]],
+    "camino-de-la-cosecha": [["/img/caminodelacosecha/camino2.webp", "/img/caminodelacosecha/camino1.webp"], ["/img/caminodelacosecha/camino3.webp", "/img/caminodelacosecha/camino4.webp"], ["/img/caminodelacosecha/camino7.mp4"]],
+    "read-your-mind": [["/img/Readyourmind/Readyourmind3.mp4"], ["/img/Readyourmind/Readyourmind1.webp", "/img/Readyourmind/Readyourmind2.webp"]],
+    "decia-hnos": [["/img/decia/decia2.webp", "/img/decia/decia6.webp"], ["/img/decia/decia4.webp", "/img/decia/decia5.webp"]],
   };
-  const selectedRows = layouts[project.id] ?? [];
-  // Si se agregan o quitan piezas, no se pierde contenido.
-  const validRows = selectedRows.map(row => row.filter(index => index < project.gallery.length)).filter(row => row.length > 0);
-  const used = new Set(validRows.flat());
-  const galleryRows = [...validRows, ...project.gallery.map((_, index) => index).filter(index => !used.has(index)).map(index => [index])];
+  const gallery = [...new Set(project.gallery)].filter(item => item !== project.img);
+  const available = new Set(gallery);
+  const used = new Set<string>();
+  const galleryRows = (layouts[project.id] ?? [])
+    .map(row => row.filter(item => {
+      if (!available.has(item) || used.has(item)) return false;
+      used.add(item);
+      return true;
+    }))
+    .filter(row => row.length > 0);
+  const remaining = gallery.filter(item => !used.has(item));
+  for (let i = 0; i < remaining.length; i += 2) {
+    galleryRows.push(remaining.slice(i, i + 2));
+  }
 
   const [tintA, tintB] = project.palette ?? ["#e8a4b3", "#b8c9db"];
 
@@ -61,28 +70,29 @@ useEffect(() => {
         </div>
       </nav>
 
-      <main className="relative isolate overflow-hidden pt-28 pb-24">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10" style={{ backgroundImage: `radial-gradient(ellipse 75% 24rem at 0% 6rem, ${tintA}55, transparent 90%), radial-gradient(ellipse 65% 30rem at 100% 42rem, ${tintB}55, transparent 90%)` }} />
-
-        {/* HEADER */}
+      <main className="pt-28">
+        {/* HEADER: jerarquía original */}
         <div className="max-w-6xl mx-auto px-6 mb-12">
           <span className="text-rose-400 text-xs uppercase tracking-widest">
             {project.category}
           </span>
-
           <h1 className="text-4xl md:text-5xl font-bold mt-2">
             {project.title}
           </h1>
         </div>
 
-        {/* HERO */}
-        <div className="w-full max-w-7xl mx-auto px-6 mb-16">
+        {/* PORTADA: ancho completo y altura original de 80vh */}
+        <div className="w-full h-[80vh]">
           <img
             src={project.img}
             alt={project.title}
-            className="block w-full max-h-[80vh] object-cover rounded-2xl"
+            className="block w-full h-full object-cover"
           />
         </div>
+
+        {/* CONTENIDO: ambiente cromático debajo de la portada */}
+        <div className="relative isolate overflow-hidden pt-12 md:pt-16 pb-24">
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10" style={{ backgroundImage: `radial-gradient(ellipse 75% 24rem at 0% 6rem, ${tintA}55, transparent 90%), radial-gradient(ellipse 65% 30rem at 100% 42rem, ${tintB}55, transparent 90%)` }} />
 
         {/* INFO GRID */}
         <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-3 gap-10 mb-20">
@@ -144,14 +154,13 @@ useEffect(() => {
                   row.length === 2 ? "md:grid-cols-12" : ""
                 }`}
               >
-                {row.map((index, column) => {
-                  const item = project.gallery[index];
-                  if (!item) return null;
+                {row.map((item, column) => {
+                  const index = gallery.indexOf(item);
                   const video = isVideo(item);
                   const wide = rowIndex % 2 === 0 ? column === 0 : column === 1;
                   return (
                     <figure
-                      key={index}
+                      key={item}
                       className={`min-w-0 m-0 ${
                         row.length === 2
                           ? wide ? "md:col-span-7" : "md:col-span-5 md:mt-12"
@@ -177,6 +186,7 @@ useEffect(() => {
           </div>
         </section>
 
+        </div>
       </main>
 
       <Footer />

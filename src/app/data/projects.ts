@@ -56,7 +56,7 @@ export const projects: Project[] = [
       "/img/fusl/VIDEO PRESENTACION .mp4",
       "/img/fusl/sitio web fusl.mp4",
       "/img/fusl/IMAGEN_1.jpg",
-      "/img/fusl/IMAGEN_2.png",
+   
       "/img/fusl/IMAGEN_4.jpg",
       "/img/fusl/IMAGEN_3.jpg",
     ],
@@ -97,7 +97,7 @@ export const projects: Project[] = [
       "Amora es un proyecto conceptual de branding y diseño digital centrado en la creación de una marca de skincare enfocada en ingredientes naturales y una estética limpia. El objetivo fue explorar cómo traducir valores como pureza, suavidad y confianza en una identidad visual coherente y adaptable tanto a packaging como a entornos digitales.",
 
     gallery: [
-      "/img/amora/AMORA4.webp",
+   
       "/img/amora/AMORA1.webp",
       "/img/amora/AMORA2.webp",
       "/img/amora/AMORA3.webp",
