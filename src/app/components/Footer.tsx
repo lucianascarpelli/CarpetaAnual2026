@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer
       id="contacto"
-      className="text-neutral-50 px-6 md:px-12 py-24"
+      className="scroll-mt-20 text-neutral-50 px-6 md:px-12 py-24"
       style={{
         backgroundColor: "#111111",
         position: "relative",
@@ -37,7 +37,7 @@ export function Footer() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 text-xl md:text-2xl font-light hover:text-rose-400 transition-colors group"
+            className="inline-flex max-w-full break-all items-center gap-2 text-base sm:text-xl md:text-2xl font-light hover:text-rose-400 transition-colors group"
           >
             lucianascarpelli2004@gmail.com
 
@@ -62,12 +62,14 @@ export function Footer() {
           <div className="flex">
              <a
               href="mailto:lucianascarpelli2004@gmail.com"
+              aria-label="Enviar correo"
               className="w-12 h-12 rounded-full border border-neutral-700 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300"
             >
               <Mail size={18} />
             </a>
             <a
               href="https://uy.linkedin.com/in/luciana-scarpelli-29a989277"
+              aria-label="LinkedIn"
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-full border border-neutral-700 flex items-center justify-center hover:bg-white hover:text-black transition-all duration-300 text-sm font-semibold tracking-tight"

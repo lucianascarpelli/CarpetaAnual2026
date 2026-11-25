@@ -25,7 +25,7 @@ export function Home() {
       <main>
    
         <Hero />
-        <Philosophy />
+   
 
      
         <div style={{ position: "relative", zIndex: 3 }}>

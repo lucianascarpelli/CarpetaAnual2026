@@ -85,15 +85,15 @@ export function Process() {
   ref={containerRef}
   onMouseMove={handleMouseMove}
   className="
-    mt-36
-    py-16 md:py-25
+    scroll-mt-20
+    py-16 md:py-20
     px-6 md:px-12
     text-neutral-50
     relative
     flex flex-col lg:flex-row
     items-center justify-center
     gap-5
-    cursor-none
+    cursor-auto
     min-h-auto lg:min-h-[70vh]
   "
   style={{
@@ -106,7 +106,7 @@ export function Process() {
 >
       {/* Cursor custom (más liviano) */}
       {isInside && (
-        <motion.div id="process"
+        <motion.div
           className="absolute top-0 left-0 w-4 h-4 bg-rose-400 rounded-full pointer-events-none z-50 mix-blend-screen"
           style={{
             x: smoothX,
@@ -136,16 +136,11 @@ export function Process() {
             </span>
           </h2>
 
-          <div className="text-lg md:text-xl text-neutral-400 font-light space-y-6">
+          <div className="text-lg md:text-xl text-neutral-200 font-light space-y-6">
             <p>
-              Trabajo entre diseño gráfico, motion y desarrollo web, combinando
-              herramientas y recursos según lo que cada proyecto necesita.
-            </p>
-            <p>
-              No parto desde una herramienta o disciplina, sino desde el problema. Más que aplicar una fórmula fija, me interesa construir soluciones
-              claras, sensibles y funcionales que respondan al contexto de cada
-              idea.
-            </p>
+              No parto siempre de las mismas herramientas ni de una única disciplina. Me interesa explorar diferentes maneras de abordar una idea y descubrir qué recursos pueden potenciarla.
+         </p>
+           
           </div>
         </motion.div>
       </div>

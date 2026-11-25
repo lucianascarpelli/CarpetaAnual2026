@@ -47,7 +47,7 @@ export function About() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative overflow-hidden"
+      className="relative overflow-hidden scroll-mt-20"
       style={{ zIndex: 3 }}
     >
       {/* Ambient background */}
@@ -69,9 +69,9 @@ export function About() {
           background: `
             linear-gradient(
               140deg,
-              rgba(255,255,255,0.16) 0%,
-              rgba(255,255,255,0.08) 40%,
-              rgba(255,255,255,0.06) 100%
+              rgba(255,255,255,0.65) 0%,
+              rgba(255,255,255,0.55) 40%,
+              rgba(255,255,255,0.48) 100%
             )
           `,
           backdropFilter: "blur(42px) saturate(140%)",
@@ -98,7 +98,7 @@ export function About() {
   className="relative flex justify-center lg:justify-start"
 >
   <div
-    className="relative w-[320px] md:w-[380px] lg:w-[430px] aspect-square overflow-hidden"
+    className="relative w-full max-w-[430px] aspect-square overflow-hidden"
     style={{
       borderRadius: "55% 45% 50% 50% / 45% 55% 45% 55%",
       background: "rgba(255,255,255,0.03)",
@@ -115,7 +115,7 @@ export function About() {
 
     {/* imagen */}
     <img
-      src="img/yo sola.png"
+      src="/img/yo sola.png"
       alt="Luciana Scarpelli"
       className="relative z-10 w-full h-full object-cover"
       style={{
@@ -132,7 +132,7 @@ export function About() {
               {/* META - sin cambios */}
               <div className="grid sm:grid-cols-3 gap-6 pt-2">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-neutral-400 mb-3">
+                  <p className="text-xs uppercase tracking-[0.2em] text-neutral-700 mb-3">
                     Formación
                   </p>
                   <div className="space-y-3">
@@ -140,15 +140,19 @@ export function About() {
                       <p className="text-neutral-800 leading-snug">
                         Licenciatura en Diseño Multimedia
                       </p>
-                      <p className="text-neutral-500 font-light text-sm mt-1">
+                      <p className="text-neutral-700 font-light text-sm mt-1">
                         Universidad ORT Uruguay · 2022 — 2026
                       </p>
+                    </div>
+                    <div>
+                      <p className="text-neutral-800 leading-snug">Diseño UX/UI Avanzado</p>
+                      <p className="text-neutral-700 text-sm mt-1">Coderhouse · En curso</p>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-neutral-400 mb-3">
+                  <p className="text-xs uppercase tracking-[0.2em] text-neutral-700 mb-3">
                     Idiomas
                   </p>
                   <div className="space-y-2 text-neutral-700">
@@ -158,7 +162,7 @@ export function About() {
                 </div>
 
                 <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-neutral-400 mb-3">
+                  <p className="text-xs uppercase tracking-[0.2em] text-neutral-700 mb-3">
                     Certificaciones
                   </p>
                   <div className="space-y-3">
@@ -166,7 +170,7 @@ export function About() {
                       <p className="text-neutral-800 leading-snug">
                         Foundations of User Experience (UX)
                       </p>
-                      <p className="text-neutral-500 font-light text-sm mt-1">
+                      <p className="text-neutral-700 font-light text-sm mt-1">
                         Google · 2026
                       </p>
                     </div>
@@ -174,7 +178,7 @@ export function About() {
                       <p className="text-neutral-800 leading-snug">
                         UX Research & Ideation
                       </p>
-                      <p className="text-neutral-500 font-light text-sm mt-1">
+                      <p className="text-neutral-700 font-light text-sm mt-1">
                         Google · 2026
                       </p>
                     </div>
@@ -191,16 +195,17 @@ export function About() {
               transition={{ duration: 0.8, delay: 0.08 }}
               className="max-w-2xl lg:pt-10"
             >
-              <p className="uppercase tracking-[0.22em] text-sm text-neutral-500 mb-7">
+              <p className="uppercase tracking-[0.22em] text-sm text-neutral-700 mb-7">
                 Sobre mí
               </p>
 
               <h2 className="text-4xl md:text-6xl leading-[0.95] tracking-tight text-neutral-900 text-bold  max-w-3xl">
-                Me interesa construir ideas desde la{" "}
+                Disfruto combinar la{" "}
                 <span className="italic text-rose-400">exploración visual</span>{" "}
-                y el cruce entre disciplinas.
+                con la tecnología y el diseño digital.
               </h2>
 
+              <p className="mt-6 text-lg leading-relaxed text-neutral-700">Soy licenciada en Diseño Multimedia, con una formación que combina diseño visual, motion graphics, UX/UI y desarrollo front-end. Disfruto explorar distintas disciplinas, aprender nuevas herramientas y descubrir cómo pueden complementarse entre sí.</p>
               {/* EXPERIENCE */}
               <div className="mt-14 relative pl-10 border-l border-neutral-300/70 space-y-10">
                 <div className="relative">
@@ -208,13 +213,13 @@ export function About() {
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 mb-2">
                     <div>
                       <h3 className="text-2xl text-neutral-900 tracking-tight">
-                        Publicis Impetu
+                        Publicis Ímpetu
                       </h3>
-                      <p className="text-neutral-500 font-light">
-                        Diseñadora Multimedia
+                      <p className="text-neutral-700 font-light">
+                        Diseñadora multimedia · Desarrollo de piezas gráficas y audiovisuales para campañas publicitarias en distintos medios y formatos.
                       </p>
                     </div>
-                    <span className="text-sm uppercase tracking-[0.18em] text-neutral-400 whitespace-nowrap">
+                    <span className="text-sm uppercase tracking-[0.18em] text-neutral-700 whitespace-nowrap">
                       2026 — Actualidad
                     </span>
                   </div>
@@ -227,11 +232,11 @@ export function About() {
                       <h3 className="text-2xl text-neutral-900 tracking-tight">
                         Freelance
                       </h3>
-                      <p className="text-neutral-500 font-light">
-                        Diseño digital, diseño y desarrollo web, Cobertura de eventos, Diseño audiovisual
+                      <p className="text-neutral-700 font-light">
+                        Diseño visual, diseño y desarrollo web, contenido audiovisual.
                       </p>
                     </div>
-                    <span className="text-sm uppercase tracking-[0.18em] text-neutral-400 whitespace-nowrap">
+                    <span className="text-sm uppercase tracking-[0.18em] text-neutral-700 whitespace-nowrap">
                       2023 — Actualidad
                     </span>
                   </div>
@@ -244,11 +249,11 @@ export function About() {
                       <h3 className="text-2xl text-neutral-900 tracking-tight">
                         Improfit
                       </h3>
-                      <p className="text-neutral-500 font-light">
-                        Diseñadora Multimedia Asistente
+                      <p className="text-neutral-700 font-light">
+                        Diseñadora multimedia
                       </p>
                     </div>
-                    <span className="text-sm uppercase tracking-[0.18em] text-neutral-400 whitespace-nowrap">
+                    <span className="text-sm uppercase tracking-[0.18em] text-neutral-700 whitespace-nowrap">
                       2025
                     </span>
                   </div>

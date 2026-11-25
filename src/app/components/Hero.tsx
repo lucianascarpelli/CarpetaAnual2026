@@ -194,16 +194,16 @@ const styles = [
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-xl font-medium mb-6 text-neutral-500 tracking-wide uppercase"
+            className="text-lg md:text-xl font-medium mb-6 text-neutral-700 tracking-wide uppercase"
           >
-            Diseñadora Multimedia
+            Lic. en Diseño Multimedia
           </motion.p>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-className="text-6xl md:text-8xl lg:text-[8rem] font-bold tracking-tighter leading-none mb-12 flex flex-wrap md:flex-nowrap items-center gap-x-6"          >
+className="text-5xl sm:text-6xl md:text-8xl lg:text-[8rem] font-bold tracking-tighter leading-none mb-12 flex flex-wrap lg:flex-nowrap items-center gap-x-6"          >
             <span>Hola, soy</span>
         <motion.span
   key={hoverIndex}
@@ -214,8 +214,8 @@ className="text-6xl md:text-8xl lg:text-[8rem] font-bold tracking-tighter leadin
     text-neutral-900
     inline-flex
     items-center
-    w-[340px]
-    md:w-[460px]
+    max-w-full
+    lg:w-[460px]
     py-2
     cursor-default
     ${styles[hoverIndex]}
@@ -229,13 +229,16 @@ className="text-6xl md:text-8xl lg:text-[8rem] font-bold tracking-tighter leadin
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="max-w-2xl border-l-2 border-neutral-300 pl-6"
+            className="max-w-2xl "
           >
             <p className="text-xl md:text-2xl text-neutral-600 font-light leading-relaxed">
-              Diseño experiencias visuales explorando distintas disciplinas,
-              herramientas y formas de pensar.
+              Exploro las posibilidades que surgen del cruce entre diseño, creatividad y tecnología.
             </p>
           </motion.div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="#projects" className="rounded-full bg-neutral-900 text-white px-6 py-3 font-medium hover:bg-neutral-700 transition-colors">Ver proyectos</a>
+            <a href="#about" className="rounded-full border border-neutral-700 text-neutral-900 px-6 py-3 font-medium hover:bg-white/60 transition-colors">Sobre mí</a>
+          </div>
         </motion.div>
       </section>
     </>

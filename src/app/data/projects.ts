@@ -1,5 +1,6 @@
 export type Project = {
   id: string;
+  palette?: [string, string];
   title: string;
   category: string;
   img: string;
@@ -17,6 +18,7 @@ export type Project = {
 export const projects: Project[] = [
   {
     id: "fundacion-usl",
+    palette: ["#83b5f4", "#ffc76b"],
     title: "Fundación Uruguay Sin Limites",
     category:
       "DISEÑO Y DESARROLLO WEB | MOTION GRAPHICS | EDICIÓN DE VIDEO | DISEÑO GRÁFICO",
@@ -62,6 +64,7 @@ export const projects: Project[] = [
 
   {
     id: "amora",
+    palette: ["#c7a88f", "#a9b5a0"],
 
     title: "Amora",
 
@@ -105,6 +108,7 @@ export const projects: Project[] = [
 
   {
     id: "quien-para",
+    palette: ["#ce769a", "#f3dca5"],
 
     title: "¿Quién Para?",
 
@@ -146,6 +150,7 @@ export const projects: Project[] = [
 
   {
     id: "camino-de-la-cosecha",
+    palette: ["#a6bf8b", "#e5ba6f"],
 
     title: "Camino de la Cosecha",
 
@@ -191,6 +196,7 @@ export const projects: Project[] = [
 
   {
     id: "read-your-mind",
+    palette: ["#f28ebf", "#a5b9f6"],
 
     title: "Read Your Mind",
 
@@ -231,6 +237,7 @@ export const projects: Project[] = [
 
   {
     id: "decia-hnos",
+    palette: ["#91b9b1", "#d5c8ac"],
 
     title: "Decia Hnos Inmobiliaria",
 
